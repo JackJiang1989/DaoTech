@@ -1,0 +1,7 @@
+{% for article in articles %}
+
+<p><a href="/blog/article_detail/{{article.id}}/">{{article.title }}</a></p>
+
+{% comment %} {{article.content}} {% endcomment %}
+
+{% endfor %}

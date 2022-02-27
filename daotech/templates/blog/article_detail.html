@@ -1,0 +1,34 @@
+<li>{{article.title }}</li>
+<li>{{article.author }}</li>
+<li>{{article.content }}</li>
+<li>{{article.date }}</li>
+<li>{{article.tag }}</li>
+<li>{{article.views }}</li>
+
+<h3>comment below</h3>
+{% for comment in comments %}
+<li>{{comment.author}}</li>
+<li>{{comment.email}}</li>
+<li>{{comment.content}}</li>
+<li>{{comment.date}}</li>
+<li>{{comment.article}}</li>
+{% endfor %}
+
+
+{% comment %} <form action="/blog/article_detail/{{article.id}}/" method="post"> {% endcomment %}
+<form action="{% url 'blog:article_detail' article.id %}" method="post">
+{% csrf_token %}
+<label for="content">content: </label>
+<input type="text" name="content" id="content">
+<label for="email">email: </label>
+<input type="email" name="email" id="email">
+{% comment %} <label for="test"></label> {% endcomment %}
+<input type="submit">
+</form>
+
+
+<form method="POST" action="">{% csrf_token %}
+    {{ form }}
+</form>
+
+{{ form.media }}

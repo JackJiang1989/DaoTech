@@ -18,6 +18,11 @@ from django.urls import path, include
 
 from . import views
 
+app_name = 'blog'
+
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('article_detail/<int:article_id>/', views.article_detail, name='article_detail'),
+    path('markdowntest/', views.markdowntest, name='markdowntest'),
+    # path('article_detail/comments/', views.comments, name='comments')
 ]

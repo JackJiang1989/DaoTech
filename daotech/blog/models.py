@@ -1,39 +1,38 @@
+from datetime import datetime
 from distutils.text_file import TextFile
 from xmlrpc.client import DateTime
 from django.db import models
+from markdownx.models import MarkdownxField
 # from django.forms import CharField, DateField, DateTimeField-
 
-# Create your models here.
+# Create your models here.con
 
 class Tag(models.Model):
     tag = models.CharField(max_length = 20)
+    def __str__(self):
+        return self.tag  
 
 class Author(models.Model):
     author = models.CharField(max_length = 20)
-
+    def __str__(self):
+        return self.author  
 
 class Article(models.Model):
-    # TAG=(
-    #     ('heat transfer','ht'),
-    #     ('mechine learning', '')
-    #     ('cooking', 'co'),
-    #     ('cycling', 'cy'),
-    #     ('reading', 're')
-    # )
-
+    title = models.CharField(max_length=200, unique=True, default='')    
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     content = models.TextField()
     date = models.DateTimeField()
     tag = models.ManyToManyField(Tag)
     views = models.PositiveIntegerField(default=0)
+    def __str__(self):
+        return self.title  
 
-
-
-class comments(models.Model):
-    author = models.CharField(max_length = 20)
-    email = models.EmailField()
+class Comment(models.Model):
+    author = models.CharField(max_length = 20, default='anonymous')
+    email = models.EmailField(blank=True)
     content = models.TextField()
-    date = models.DateTimeField()
+    content = MarkdownxField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     
     article = models.ForeignKey(
         Article,
@@ -41,11 +40,17 @@ class comments(models.Model):
         on_delete=models.CASCADE) 
         #Cascade deletes. Django emulates the behavior of the SQL constraint ON DELETE CASCADE and also deletes the object containing the ForeignKey.
 
-    parent_comment = models.ForeignKey(
-        'self',
-        # verbose_name="上级评论",
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE)            
+    # parent_comment = models.ForeignKey(
+    #     'self',
+    #     # verbose_name="上级评论",
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.CASCADE) 
+
+    def __str__(self):
+        return 'comment '+self.article.title + ' ' + self.author + ' {date}'.format(date=self.date)
 
 
+
+class MarkDownTest(models.Model):
+    myfield = MarkdownxField()
