@@ -1,1 +1,39 @@
-1) articles
+#html trick
+#form
+
+#"for" attribute in "label" element
+The for attribute of a label element corresponds to the id attribute of an input element. If you click the label, it puts focus on the input box.
+If you click on the text, it checks the box.
+https://stackoverflow.com/questions/7636502/why-use-label
+
+
+#"name" vs "id"
+Use name attributes for form controls (such as <input> and <select>), as that's the identifier used in the POST or GET call that happens on form submission.
+Use id attributes whenever you need to address a particular HTML element with CSS, JavaScript or a fragment identifier. It's possible to look up elements by name, too, but it's simpler and more reliable to look them up by ID.
+
+id is used to identify the HTML element through the Document Object Model (via JavaScript or styled with CSS). id is expected to be unique within the page.
+name corresponds to the form element and identifies what is posted back to the server.
+
+
+#"id" vs "class"
+Think of University.
+<student id="JonathanSampson" class="Biology" />
+<student id="MarySmith" class="Biology" />
+Student ID cards are distinct. No two students on campus will have the same student ID card. However, many students can and will share at least one Class with each other.
+
+It's okay to put multiple students under one Class title, Biology 101. But it's never acceptable to put multiple students under one student ID.
+
+When giving Rules over the school intercom system, you can give Rules to a Class:
+
+"Would the Biology class please wear Red Shirts tomorrow?"
+
+.BiologyClass {
+  shirt-color:red;
+}
+Or you can give rules to a Specific Student, by calling his unique ID:
+
+"Would Jonathan Sampson please wear a Green Shirt tomorrow?"
+
+#JonathanSampson {
+  shirt-color:green;
+}

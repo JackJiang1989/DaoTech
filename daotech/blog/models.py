@@ -3,6 +3,8 @@ from distutils.text_file import TextFile
 from xmlrpc.client import DateTime
 from django.db import models
 from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
+from django.urls import reverse
 # from django.forms import CharField, DateField, DateTimeField-
 
 # Create your models here.con
@@ -30,7 +32,7 @@ class Article(models.Model):
 class Comment(models.Model):
     author = models.CharField(max_length = 20, default='anonymous')
     email = models.EmailField(blank=True)
-    content = models.TextField()
+    # content = models.TextField()
     content = MarkdownxField()
     date = models.DateTimeField(default=datetime.now, blank=True)
     
@@ -47,10 +49,28 @@ class Comment(models.Model):
     #     null=True,
     #     on_delete=models.CASCADE) 
 
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.content)
+
     def __str__(self):
         return 'comment '+self.article.title + ' ' + self.author + ' {date}'.format(date=self.date)
 
+    def get_absolute_url(self):
+        return reverse("blog:article_detail", kwargs={"article_id": self.pk})
 
 
-class MarkDownTest(models.Model):
-    myfield = MarkdownxField()
+class Food(models.Model):
+    name = models.CharField(max_length=50)
+    taste = models.TextField()
+    stars = models.PositiveSmallIntegerField()
+
+    # class Meta:
+    #     verbose_name = _("")
+    #     verbose_name_plural = _("s")
+
+    # def __str__(self):
+    #     return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse("_detail", kwargs={"pk": self.pk})

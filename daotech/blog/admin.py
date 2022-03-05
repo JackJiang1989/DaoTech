@@ -2,10 +2,11 @@ from django.contrib import admin
 from markdownx.admin import MarkdownxModelAdmin
 # Register your models here.
 
-from .models import Article, Author, Tag, Comment, MarkDownTest
+from .models import Article, Author, Tag, Comment, Food
 
 admin.site.register(Article)
 admin.site.register(Author)
 admin.site.register(Tag)
 admin.site.register(Comment)
-admin.site.register(MarkDownTest, MarkdownxModelAdmin)
+admin.site.register(Food)
+# admin.site.register(MarkDownTest, MarkdownxModelAdmin)

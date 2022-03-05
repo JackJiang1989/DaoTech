@@ -10,25 +10,22 @@
 <li>{{comment.author}}</li>
 <li>{{comment.email}}</li>
 <li>{{comment.content}}</li>
+<li>{{comment.formatted_markdown|safe }}</li>
 <li>{{comment.date}}</li>
 <li>{{comment.article}}</li>
 {% endfor %}
 
 
 {% comment %} <form action="/blog/article_detail/{{article.id}}/" method="post"> {% endcomment %}
-<form action="{% url 'blog:article_detail' article.id %}" method="post">
+{% comment %} <form action="{% url 'blog:article_detail' article.id %}" method="post"> {% endcomment %}
+<form action="{{article.get_absolute_url}}" method="post">
 {% csrf_token %}
 <label for="content">content: </label>
 <input type="text" name="content" id="content">
-<label for="email">email: </label>
+<label for="email">email: <s/label>
 <input type="email" name="email" id="email">
 {% comment %} <label for="test"></label> {% endcomment %}
 <input type="submit">
 </form>
 
 
-<form method="POST" action="">{% csrf_token %}
-    {{ form }}
-</form>
-
-{{ form.media }}
