@@ -37,3 +37,22 @@ Or you can give rules to a Specific Student, by calling his unique ID:
 #JonathanSampson {
   shirt-color:green;
 }
+
+
+
+
+#python trick, *arg and **kwargs
+One place where the use of *args and **kwargs is quite useful is for subclassing.
+
+class Foo(object):
+    def __init__(self, value1, value2):
+        # do something with the values
+        print value1, value2
+
+class MyFoo(Foo):
+    def __init__(self, *args, **kwargs):
+        # do something else, don't care about the args
+        print 'myfoo'
+        super(MyFoo, self).__init__(*args, **kwargs)
+This way you can extend the behaviour of the Foo class, without having to know too much about Foo. This can be quite convenient if you are programming to an API which might change. MyFoo just passes all arguments to the Foo class.
+

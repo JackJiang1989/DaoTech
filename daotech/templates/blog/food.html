@@ -1,5 +1,17 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap-responsive.min.css' %}"> {% endcomment %}
+
+
+
+
 <form action="" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit">
 </form>
+
+{% comment %} "{% static 'blog/3.jpg' %}" {% endcomment %}
+<img src="{% static 'blog/images/3.jpg' %}" alt="My image">
+
+<script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}</script>

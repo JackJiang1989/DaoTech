@@ -1,0 +1,49 @@
+{% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center"> {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-center">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><span class="mx-3 px-3 h1">ShengDao Simulation</span></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% comment %} <ul class="navbar-nav me-auto mb-2 mb-lg-0" > {% endcomment %}
+        <ul class="navbar-nav ms-auto my-2 me-5" >
+            <li class="nav-item px-3">
+            {% comment %} <a class="nav-link active" aria-current="page" href="#">Home</a> {% endcomment %}
+            <a class="nav-link" aria-current="page" href="#"><span class="h4">About me</span></a>                
+          </li>
+          <li class="nav-item px-3" >
+            <a class="nav-link" href="#"><span class="h4">Articles</span></a>
+          </li>
+          <li class="nav-item px-3" >          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="h4">Tools</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">heat transfer</a></li>
+              <li><a class="dropdown-item" href="#">physical property</a></li>
+              <li><a class="dropdown-item" href="#">pressure drop</a></li>
+              <li><a class="dropdown-item" href="#">heat exchanger</a></li>
+            </ul>
+          </li>  
+        </li>                   
+        </ul>
+        {% comment %} <form class="d-flex">
+          <input class="form-control me-2" type="search"  aria-label="Search">
+          <button class="btn btn-outline-light" type="submit"><span class="h4">search</span></button> 
+        </form> {% endcomment %}
+          <form role="search" method="get" id="searchform" class="d-flex" action="/search">
+                <input class="form-control me-2" type="text" value="" name="q" id="q" aria-label="Search">
+                {% comment %} <input type="submit" id="searchsubmit" value="搜索"/> {% endcomment %}
+                <button class="btn btn-outline-dark" type="submit" id="searchsubmit" value="search"/><span class="h4">search</span></button>
+                {% comment %} <input type="text" value="" name="q" id="q"/> {% endcomment %}
+                {% comment %} <input type="submit" id="searchsubmit" value="搜索"/> {% endcomment %}
+        </form>
+
+        
+      </div>
+    </div>
+  </nav>

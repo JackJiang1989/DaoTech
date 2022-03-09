@@ -8,8 +8,13 @@ from .form import FoodForm, MyForm
 
 def index(request):
     articles = Article.objects.all()
-#    articles = Article.objects.filter()
-    context = {'articles': articles}
+    for_highlight = Article.objects.get(pk=1)
+    for_card1 = Article.objects.get(pk=2)
+    for_card2 = Article.objects.get(pk=3)
+    context = {'articles': articles,
+                'for_highlight': for_highlight,
+                'for_card1': for_card1,
+                'for_card2': for_card2}
     return render(request, 'blog/index.html', context)
 #    return HttpResponse("hello world")
 
@@ -62,6 +67,7 @@ def markdowntest(request):
 def food(request):
     if request.method == 'POST':
         form = FoodForm(request.POST)
+        # print(form.is_bound)
         if form.is_valid:
             form.save()
             # alternatively:
@@ -71,5 +77,6 @@ def food(request):
 
     else:
         form = FoodForm()
+    # print(form.is_bound)
     context = {'form':form}
     return render(request, 'blog/food.html', context)
