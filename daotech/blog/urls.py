@@ -23,6 +23,7 @@ app_name = 'blog'
 urlpatterns = [
     path('', views.index, name='index'),
     path('article_detail/<int:article_id>/', views.article_detail, name='article_detail'),
+    path('article_all/', views.article_all, name='article_all'),
     path('markdowntest/', views.markdowntest, name='markdowntest'),
     path('food/', views.food, name='food'),
     # path('article_detail/comments/', views.comments, name='comments')

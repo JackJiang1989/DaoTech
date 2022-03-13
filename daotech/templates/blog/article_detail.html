@@ -1,31 +1,59 @@
-<li>{{article.title }}</li>
-<li>{{article.author }}</li>
-<li>{{article.content }}</li>
-<li>{{article.date }}</li>
-<li>{{article.tag }}</li>
-<li>{{article.views }}</li>
+{% extends 'shared/base.html' %}
 
-<h3>comment below</h3>
-{% for comment in comments %}
-<li>{{comment.author}}</li>
-<li>{{comment.email}}</li>
-<li>{{comment.content}}</li>
-<li>{{comment.formatted_markdown|safe }}</li>
-<li>{{comment.date}}</li>
-<li>{{comment.article}}</li>
-{% endfor %}
+{% block content %}
+
+  <nav class="bd-subnavbar pt-2 pb-3 pb-md-2">
+  <div class="d-flex justify-content-evenly w-25 m-auto">
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">All posts</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Archive</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Videos</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Subscribe</a>
+
+  </div>
+</nav>
+
+<div class="container">
+    <div class="posts-container mx-auto px-3 my-5">
+        <div class="posts">
+            <div class="post">
+                <li>{{article.title }}</li>
+                <li>{{article.author }}</li>
+                <li>{{article.content }}</li>
+                <li>{{article.date }}</li>
+                <li>{{article.tag }}</li>
+                <li>{{article.views }}</li>
+
+                <h3>comment below</h3>
+                {% for comment in comments %}
+                    <li>{{comment.author}}</li>
+                    <li>{{comment.email}}</li>
+                    <li>{{comment.content}}</li>
+                    <li>{{comment.formatted_markdown|safe }}</li>
+                    <li>{{comment.date}}</li>
+                    <li>{{comment.article}}</li>
+                {% endfor %}
+
+                {% comment %} <form action="/blog/article_detail/{{article.id}}/" method="post"> {% endcomment %}
+                {% comment %} <form action="{% url 'blog:article_detail' article.id %}" method="post"> {% endcomment %}
+                    <form action="{{article.get_absolute_url}}" method="post">
+                        {% csrf_token %}
+                        <label for="content">content: </label>
+                        <input type="text" name="content" id="content">
+                        <label for="email">email: <s/label>
+                        <input type="email" name="email" id="email">
+                        {% comment %} <label for="test"></label> {% endcomment %}
+                        <input type="submit">
+                    </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
-{% comment %} <form action="/blog/article_detail/{{article.id}}/" method="post"> {% endcomment %}
-{% comment %} <form action="{% url 'blog:article_detail' article.id %}" method="post"> {% endcomment %}
-<form action="{{article.get_absolute_url}}" method="post">
-{% csrf_token %}
-<label for="content">content: </label>
-<input type="text" name="content" id="content">
-<label for="email">email: <s/label>
-<input type="email" name="email" id="email">
-{% comment %} <label for="test"></label> {% endcomment %}
-<input type="submit">
-</form>
 
+
+
+
+{% endblock %}
 

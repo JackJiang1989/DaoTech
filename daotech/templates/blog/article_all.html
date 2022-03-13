@@ -1,0 +1,38 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+  <nav class="bd-subnavbar pt-2 pb-3 pb-md-2">
+  <div class="d-flex justify-content-evenly w-25 m-auto">
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">All posts</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Archive</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Videos</a>
+    <a class="text-dark py-1 mx-auto text-decoration-none" href="#">Subscribe</a>
+
+  </div>
+</nav>
+
+<div class="container">
+    <div class="posts-container mx-auto px-3 my-5">
+        <div class="posts">
+            <div class="post">
+                {% for article in articles %}
+                <h1><li>{{article.title }}</li></h1>
+                <li>{{article.author }}</li>
+                <li>{{article.content }}</li>
+                <li>{{article.date }}</li>
+                <li>{{article.tag }}</li>
+                <li>{{article.views }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
+

@@ -37,17 +37,33 @@
       } 
  {% endcomment %}
 
+    {% comment %} .carousel-indicators button{
+      background-color: #777;
+        
+    } {% endcomment %}
+
+
+
+
+{% comment %} .carousel-control-prev-icon {
+   background-image: url(/blog/images/door-open.svg); 
+} {% endcomment %}
+
 
      .carousel-item{
-        height: 465px;
+        height: 450px;
     }  
     .carousel-item img{
-        height: 465px;
+        height: 450px;
     } 
 
     .carousel-item svg{
-      height: 465px;
+      height: 450px;
   }  
+
+  {% comment %} .carousel-indicators button{
+    background-color: #adb5bd
+  } {% endcomment %}
 
 
 {% comment %} 
@@ -68,9 +84,11 @@
 
 
 <body>
-  {% include 'shared/nav.html' %}
+  {% include 'shared/header.html' %}
   {% include 'shared/carousel.html'%}
-    <div class="container">
+  {% comment %} {% include 'shared/subnav.html' %} {% endcomment %}
+
+
         
        
            
@@ -80,31 +98,25 @@
       {% block card %}
       {% endblock %}
       
-      <br>
 
         {% comment %} article post list {% endcomment %}
-        <div class="row g-5">
-            <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-            </div>
+
+
+              {% block content %}
+                {% endblock %} 
         
 
             {% comment %} right side stuff1 {% endcomment %}
-            <div class="col-md-4">
+            {% comment %} <div class="col-md-4">
                 {% include 'shared/sidebar.html' %}
-            </div>
-        </div>
-            
-    </div>
+            </div> {% endcomment %}
 
-    <footer class="blog-footer">
+   
+
         {% include 'shared/footer.html' %}
-    </footer>
     
     <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"> </script>
       {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> {% endcomment %}
-      {% static 'blog/js/bootstrap.min.js' %}
 
 </body>
 

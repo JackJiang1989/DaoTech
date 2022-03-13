@@ -18,9 +18,13 @@ def index(request):
     return render(request, 'blog/index.html', context)
 #    return HttpResponse("hello world")
 
+def article_all(request):
+    articles = Article.objects.all()
+    context = {'articles': articles}    
+    return render(request, 'blog/article_all.html', context)
+
 
 def article_detail(request, article_id):
-    
     #get the parameter from URL #article1
  #   article = Article.objects.filter(id = id)
 #    article = Article.objects.get(pk = id)
