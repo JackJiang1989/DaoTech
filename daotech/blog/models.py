@@ -30,7 +30,7 @@ class Article(models.Model):
         return self.title  
     
     def get_absolute_url(self):
-       return reverse("blog:article_detail", kwargs={"article_id": self.pk})
+       return reverse("blog:article_one", kwargs={"article_id": self.pk})
     
 
 class Comment(models.Model):
@@ -61,7 +61,7 @@ class Comment(models.Model):
         return 'comment '+self.article.title + ' ' + self.author + ' {date}'.format(date=self.date)
 
     def get_absolute_url(self):
-        return reverse("blog:article_detail", kwargs={"article_id": self.pk})
+        return reverse("blog:article_one", kwargs={"article_id": self.pk})
 
 
 class Food(models.Model):
@@ -78,3 +78,10 @@ class Food(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse("_detail", kwargs={"pk": self.pk})
+
+
+class AboutMe(models.Model):
+    content = MarkdownxField()    
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.content)

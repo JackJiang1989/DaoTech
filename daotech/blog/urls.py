@@ -22,8 +22,10 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('article_detail/<int:article_id>/', views.article_detail, name='article_detail'),
+    path('article_one/<int:article_id>/', views.article_one, name='article_one'),
     path('article_all/', views.article_all, name='article_all'),
+    path('article_archive/', views.article_archive, name='article_archive'),    
+    path('about_me/', views.about_me, name='about_me'),    
     path('markdowntest/', views.markdowntest, name='markdowntest'),
     path('food/', views.food, name='food'),
     # path('article_detail/comments/', views.comments, name='comments')

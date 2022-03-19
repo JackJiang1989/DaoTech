@@ -5,16 +5,20 @@
 {% endblock header %}
 
 {% block carousel %}
-{% include 'shared/carousel.html'%}
+{% comment %} {% include 'shared/carousel.html'%} {% endcomment %}
 {% endblock carousel %}
 
 {% block content %}
-{% include 'blog/lego/album.html' %}
+    <nav class="bd-subnavbar pt-2 pb-3 pb-md-2">
+        {% include 'blog/lego/subnavbar.html' %}
+        {% include 'blog/lego/article_detail.html' %}
+    </nav>
 {% endblock content %}
+
+
 
 {% block footer %}
 {% include 'shared/footer.html' %}
 {% endblock footer %}
-
 
 

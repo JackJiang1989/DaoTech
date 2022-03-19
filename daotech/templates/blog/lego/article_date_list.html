@@ -1,0 +1,21 @@
+
+    <div class="container mx-auto px-3 my-5">
+
+        {% for year, archive in archives %}
+            {% for date, title, pk in archive %}
+            <br>
+                {{date}}
+                <a href="/blog/article_one/{{ pk }}/">{{title}}</a>
+            {% endfor %}
+        {% comment %} {{date_title_pk_list}} {% endcomment %}
+            {% comment %} {% for x,y,z in year_date_title_pk_list %}
+                {{x}}
+            {% endfor %} {% endcomment %}
+        {% comment %} {% for year, date, title,pk in year_date_title_pk_list %}
+        {{ year }} archives: 
+           <a href="/blog/article_detail/{{ pk }}/"></a>
+        {% endfor %} {% endcomment %}
+
+        {% endfor %}
+
+     </div>

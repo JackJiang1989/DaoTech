@@ -1,0 +1,13 @@
+
+    <div class="container mx-auto px-3 my-5">
+
+                {% for article in articles %}
+                <h1><li>{{article.title }}</li></h1>
+                <li>{{article.author }}</li>
+                <li>{{article.content }}</li>
+                <li>{{article.date }}</li>
+                <li>{{article.tag }}</li>
+                <li>{{article.views }}</li>
+                {% endfor %}
+
+     </div>

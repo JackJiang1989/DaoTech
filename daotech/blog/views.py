@@ -1,10 +1,12 @@
 from audioop import reverse
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Article, Comment
+from .models import AboutMe, Article, Comment
 from django.urls import reverse
 from .form import FoodForm, MyForm
 # Create your views here.
+from datetime import date
+
 
 def index(request):
     articles = Article.objects.all()
@@ -24,7 +26,7 @@ def article_all(request):
     return render(request, 'blog/article_all.html', context)
 
 
-def article_detail(request, article_id):
+def article_one(request, article_id):
     #get the parameter from URL #article1
  #   article = Article.objects.filter(id = id)
 #    article = Article.objects.get(pk = id)
@@ -36,17 +38,62 @@ def article_detail(request, article_id):
         comments = None
     context = {'article': article, 'comments':comments}
     if request.method == 'GET':
-        print(request.META)
-        return render(request, 'blog/article_detail.html', context)
+        # print(request.META)
+        return render(request, 'blog/article_one.html', context)
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         comment_new = Comment.objects.create(content=request.POST['content'], email=request.POST['email'],article=article)
         # comment_new = Comment(content=request.POST['test'], article=article)
         # comment_new.save()\
         # print(reverse('blog:article_detail', args = (article_id,)))
         # return HttpResponseRedirect(reverse('blog:article_detail', args = (article_id,)))
-        return HttpResponseRedirect('/blog/article_detail/{article_id}/'.format(article_id = article_id))
+        return HttpResponseRedirect('/blog/article_one/{article_id}/'.format(article_id = article_id))
 
+
+def article_archive1(request):
+    arch = Article.objects.dates('date', 'month', order = 'DESC')
+    archives = {}
+    for i in arch:
+        pk = i.pk
+        year = i.year
+        month = i.month
+        try:
+            archives[year][month-1][1]=True
+        except KeyError:
+            # catch the KeyError, and set up list for that year
+            archives[year]=[[date(year,m,1),False] for m in range(1,13)]
+            archives[year][month-1][1]=True
+    # print(sorted(archives.items(), reverse=True))
+    return render(request, 'blog/article_archive.html', {'archives':sorted(archives.items(), reverse=True)})
+
+def article_archive(request):
+    articles = Article.objects.all().order_by('-date')
+    archives = {}
+    for article in articles:
+        # archives.append([article.date.year,article.date,article.title, article.pk])
+        try:
+            archives[article.date.year].append([article.date,article.title, article.pk])
+        except KeyError:
+            archives[article.date.year]=[]
+            archives[article.date.year].append([article.date,article.title, article.pk])
+    # print(archives)
+    # print(sorted(archives.items(), key=lambda item:item[0]))
+    # test = sorted(archives.items(), key=lambda item:item[0])
+    # print(test[0][1][0][0])
+    # for a in articles:
+    #     print(a.date)
+    #     print(a.date.month)
+    #     print(a.date.year)      
+    #     print(a.title)  
+    # context = {'articles': articles}    
+    # return HttpResponse('test')
+    return render(request, 'blog/article_archive.html', {'archives':sorted(archives.items(), key=lambda item:item[0])})
+    # return render(request, 'blog/article_archive.html', {'archives':archives})
+
+def about_me(request):
+    about_me = AboutMe.objects.get(pk=1)
+    context = {'about_me':about_me}
+    return render(request, 'blog/about_me.html', context)
 
 
 def markdowntest(request):
